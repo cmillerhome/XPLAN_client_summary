@@ -1,0 +1,21 @@
+<:#superannuation tables including superfund name, owner & balance.
+<:if len($client.fund) or len($partner.fund):>
+<:if len($client.fund):>
+<:for item in $client.fund:>
+<:=item.fund_super_plan:>	<:=$client.first_name:>	$<:=item.fund_total_balance:>
+<:end:>
+<:else:>
+No superannuation recorded for client.
+<:end:>
+<:if $partner:>
+<:if len($partner.fund):>
+<:for item in $partner.fund:>
+<:=item.fund_super_plan:>	<:=$partner.first_name:>	$<:=item.fund_total_balance:>
+<:end:>
+<:else:>
+No superannuation recorded for partner
+<:end:>
+<:end:>
+<:else:>
+No superannuation recorded
+<:end:>
