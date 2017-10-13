@@ -1,0 +1,38 @@
+<:if len($client.insurance_by_policy) or ($partner.insurance_by_policy):>
+<:if len($client.insurance_by_policy):>
+<:for item in $client.insurance_by_policy:>
+<:=item.coy:>
+<:=item.covers()[0].life_insured:>
+<:=item.owner:>
+<:=item.policy_number:>
+$<:=currency(floatify(item.life_sum_insured_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.ip_benefit_amount_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.tpd_sum_insured_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.trauma_sum_insured_by_cover($client.entity_id)),0):>
+$<:=item.benefit_premium:>	<:=item.frequency:>
+<:end:>
+Total Premium	$<:=$client.insurance_by_cover.sum(‘benefit_premium’):>
+<:else:>
+No insurance recorded for client
+<:end:>
+Total Premium	$<:=$client.insurance_by_cover.sum(‘benefit_premium’):>
+<:if $partner:>
+<:if len($partner.insurance_by_policy):>
+<:for item in $partner.insurance_by_policy:>
+<:=item.coy:>
+<:=item.covers()[0].life_insured:>
+<:=item.owner:>	<:=item.policy_number:>
+$<:=currency(floatify(item.life_sum_insured_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.ip_benefit_amount_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.tpd_sum_insured_by_cover($client.entity_id)),0):>
+$<:=currency(floatify(item.trauma_sum_insured_by_cover($client.entity_id)),0):>
+$<:=item.benefit_premium:>	<:=item.frequency:>
+<:end:>
+Total Premium	$<:=$partner.insurance_by_cover.sum(‘benefit_premium’):>
+<:else:>
+No insurance recorded for partner
+<:end:>
+<:end:>
+<:else:>
+No insurance recorded
+<:end:>
